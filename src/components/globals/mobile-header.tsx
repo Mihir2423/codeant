@@ -6,10 +6,7 @@ interface MobileHeaderProps {
   isOpen: boolean;
 }
 
-export default function MobileHeader({
-  onMenuClick,
-  isOpen,
-}: MobileHeaderProps) {
+export default function MobileHeader({ onMenuClick, isOpen }: MobileHeaderProps) {
   return (
     <header className="top-0 right-0 left-0 z-[32] fixed flex justify-between items-center border-gray-200 md:hidden bg-white px-4 border-b h-[60px]">
       <Logo />
