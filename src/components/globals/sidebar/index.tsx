@@ -1,7 +1,7 @@
 import { sideLinks } from "@/constants/side-links";
-import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "../logo";
+import { ProfileDropwdonw } from "./profile-dropdown";
 import { SidebarLink } from "./sidebar-link";
 
 interface SidebarProps {
@@ -19,17 +19,7 @@ export const Sidebar = ({ username, isOpen }: SidebarProps) => {
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-5">
             <Logo />
-            <button className="flex justify-between items-center shadow-[#0A0D120D] shadow-xs px-3 py-2 border border-border-strong rounded-md">
-              <div className="flex-1 min-w-0">
-                <p className="text-content-primary text-base truncate">
-                  {username}
-                </p>
-              </div>
-              <ChevronDown
-                size={24}
-                className="flex-shrink-0 text-content-primary ml-1"
-              />
-            </button>
+            <ProfileDropwdonw username={username} />
           </div>
           <div className="flex flex-col gap-[2px]">
             {sideLinks.map((link) => (
@@ -58,17 +48,7 @@ export const Sidebar = ({ username, isOpen }: SidebarProps) => {
       >
         <div className="flex flex-col h-full">
           <div className="flex justify-between items-center border-gray-200 p-4 pb-0">
-            <button className="flex justify-between items-center shadow-[#0A0D120D] shadow-xs px-3 py-2 border border-border-strong rounded-md w-full">
-              <div className="flex-1 min-w-0">
-                <p className="text-content-primary text-base text-start truncate">
-                  {username}
-                </p>
-              </div>
-              <ChevronDown
-                size={18}
-                className="flex-shrink-0 text-content-primary ml-2"
-              />
-            </button>
+            <ProfileDropwdonw username={username} />
           </div>
           <nav className="flex-1 space-y-1 px-4 py-3 overflow-y-auto">
             <div className="flex flex-col gap-[2px]">
