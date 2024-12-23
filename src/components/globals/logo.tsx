@@ -8,7 +8,7 @@ export const Logo = () => {
         height={32}
         className=""
       />
-      <h1 className="font-normal text-2xl leading-[26px]">CodeAnt AI</h1>
+      <h1 className="font-normal text-2xl leading-[26px] satoshi">CodeAnt AI</h1>
     </div>
   );
 };
