@@ -21,6 +21,7 @@ module.exports = {
         content: {
           strong: "#181D27",
           primary: "#414651",
+          light: "#171717",
           accent: "#175CD3",
         },
         shadow: {
