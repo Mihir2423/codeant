@@ -10,7 +10,7 @@ interface Account {
   isActive: boolean;
 }
 
-export const ProfileDropwdonw = ({ username }: Props) => {
+export const ProfileDropdown = ({ username }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
