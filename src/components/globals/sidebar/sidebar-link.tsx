@@ -14,7 +14,7 @@ export const SidebarLink = (props: SideLinkProps) => {
     >
       <div
         className={classNames(
-          "flex items-center gap-[11px] py-[10px] group hover:bg-action rounded-md cursor-pointer px-[14px] transition-all duration-100 ease-in-out",
+          "flex items-center gap-2 md:gap-[11px] py-[10px] group hover:bg-action rounded-md cursor-pointer px-[14px] transition-all duration-100 ease-in-out",
           {
             "bg-action": props.isActive,
           }

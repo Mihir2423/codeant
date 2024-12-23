@@ -3,13 +3,19 @@ import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { SignInCard } from "./_components/sign-in-card";
 import { signInOptions } from "@/constants/sign-in-options";
+import { ScaleLoader } from "@/components/ui/scale-loader";
 
 const SignIn = () => {
   const [activeTab, setActiveTab] = useState("saas");
+  const [isLoading, setIsLoading] = useState(false);
   const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
   const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
   const optionsRef = useRef<HTMLDivElement>(null);
+
+  const handleLoadingChange = (loading: boolean) => {
+    setIsLoading(loading);
+  };
 
   useEffect(() => {
     const currentTab = tabsRef.current[activeTab === "saas" ? 0 : 1];
@@ -22,7 +28,8 @@ const SignIn = () => {
     }
   }, [activeTab]);
   return (
-    <div className="grid md:grid-cols-2 h-screen">
+    <div className="relative grid md:grid-cols-2 h-screen">
+      {isLoading && <ScaleLoader />}
       <div className="flex justify-start items-end max-md:hidden col-span-1 bg-[url('/bg/auth.png')] bg-cover bg-no-repeat bg-center border-r w-full h-full">
         <img
           src="/images/auth-sub.png"
@@ -48,10 +55,13 @@ const SignIn = () => {
                     onClick={() => setActiveTab(tab)}
                   >
                     <h1
-                      className={classNames("font-semibold text-lg transition-all ease-in-out duration-150", {
-                        "text-surface-elevated": activeTab === tab,
-                        "text-content-strong": activeTab !== tab,
-                      })}
+                      className={classNames(
+                        "font-semibold text-lg transition-all ease-in-out duration-150",
+                        {
+                          "text-surface-elevated": activeTab === tab,
+                          "text-content-strong": activeTab !== tab,
+                        }
+                      )}
                     >
                       {tab === "saas" ? "SAAS" : "Self Hosted"}
                     </h1>
@@ -74,6 +84,7 @@ const SignIn = () => {
                   icon={option.icon}
                   text={option.text}
                   key={option.icon}
+                  onRouteChange={handleLoadingChange}
                 />
               ) : null;
             })}

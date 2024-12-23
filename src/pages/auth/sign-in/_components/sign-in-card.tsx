@@ -1,14 +1,26 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
   icon: string;
   text: string;
+  onRouteChange?: (loading: boolean) => void;
 };
 
-export const SignInCard = ({ icon, text }: Props) => {
+export const SignInCard = ({ icon, text, onRouteChange }: Props) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleClick = async () => {
+    setIsLoading(true);
+    onRouteChange?.(true);
+
+    // Wait for 2 seconds
+    await new Promise((resolve) => setTimeout(resolve, 500));
+
+    setIsLoading(false);
+    onRouteChange?.(false);
     navigate("/repositories");
   };
 
@@ -16,7 +28,7 @@ export const SignInCard = ({ icon, text }: Props) => {
     <div className="w-full md:w-2/3">
       <div
         className="flex justify-center items-center gap-4 py-4 border border-border-strong rounded-[8px] w-full cursor-pointer"
-        onClick={handleClick}
+        onClick={!isLoading ? handleClick : undefined}
       >
         <img src={`/icons/${icon}.svg`} alt={icon} width={24} height={24} />
         <h1 className="text-content-light font-semibold text-base">{text}</h1>

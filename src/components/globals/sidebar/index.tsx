@@ -26,8 +26,8 @@ export const Sidebar = ({ username, isOpen }: SidebarProps) => {
                 </p>
               </div>
               <ChevronDown
-                size={18}
-                className="flex-shrink-0 text-content-primary ml-2"
+                size={24}
+                className="flex-shrink-0 text-content-primary ml-1"
               />
             </button>
           </div>
@@ -60,7 +60,7 @@ export const Sidebar = ({ username, isOpen }: SidebarProps) => {
           <div className="flex justify-between items-center border-gray-200 p-4 pb-0">
             <button className="flex justify-between items-center shadow-[#0A0D120D] shadow-xs px-3 py-2 border border-border-strong rounded-md w-full">
               <div className="flex-1 min-w-0">
-                <p className="text-content-primary text-base truncate">
+                <p className="text-content-primary text-base text-start truncate">
                   {username}
                 </p>
               </div>
