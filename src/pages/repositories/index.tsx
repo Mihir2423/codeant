@@ -23,14 +23,18 @@ const Repositories = () => {
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                <button className="flex items-center gap-1 shadow-shadow-accent shadow-xs px-[14px] py-[10px] border rounded-md">
-                  <RefreshCw size={16} />
+                <button className="flex items-center gap-1 shadow-shadow-accent shadow-xs px-[14px] py-[10px] border rounded-md group">
+                  <RefreshCw size={16} className="group-hover:animate-spin" />
                   <span className="inline font-normal text-sm">
                     Refresh All
                   </span>
                 </button>
-                <button className="flex items-center gap-1 bg-action px-[14px] py-[10px] border rounded-md">
-                  <Plus size={16} color="#fff" />
+                <button className="flex items-center gap-1 bg-action px-[14px] py-[10px] border rounded-md group">
+                  <Plus
+                    size={16}
+                    color="#fff"
+                    className="group-hover:scale-[1.15] transition-all duration-100 ease-in-out"
+                  />
                   <span className="inline font-normal text-sm text-white">
                     Add Repository
                   </span>
