@@ -27,7 +27,7 @@ export const SignInCard = ({ icon, text, onRouteChange }: Props) => {
   return (
     <div className="w-full md:w-2/3">
       <div
-        className="flex justify-center items-center gap-4 py-4 border border-border-strong rounded-[8px] w-full cursor-pointer"
+        className="flex justify-center items-center gap-4 hover:bg-surface-base py-4 border border-border-strong rounded-[8px] w-full cursor-pointer"
         onClick={!isLoading ? handleClick : undefined}
       >
         <img src={`/icons/${icon}.svg`} alt={icon} width={24} height={24} />
