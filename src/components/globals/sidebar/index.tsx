@@ -46,7 +46,7 @@ export const Sidebar = ({ username, isOpen }: SidebarProps) => {
         </div>
         <div className="flex flex-col gap-[2px]">
           <SidebarLink name="Support" icon="phone" href="/" />
-          <SidebarLink name="Logout" icon="sign-out" href="/" />
+          <SidebarLink name="Logout" icon="sign-out" href="/sign-in" />
         </div>
       </aside>
       <div
@@ -81,7 +81,7 @@ export const Sidebar = ({ username, isOpen }: SidebarProps) => {
                 />
               ))}
               <SidebarLink name="Support" icon="phone" href="/" />
-              <SidebarLink name="Logout" icon="sign-out" href="/" />
+              <SidebarLink name="Logout" icon="sign-out" href="/sign-in" />
             </div>
           </nav>
         </div>

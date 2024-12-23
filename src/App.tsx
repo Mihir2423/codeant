@@ -17,6 +17,19 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Redirect root to sign-in */}
+        <Route path="/" element={<Navigate to="/sign-in" replace />} />
+
+        {/* Auth routes first */}
+        <Route
+          path="/sign-in"
+          element={
+            <AuthLayoutRoute>
+              <SignIn />
+            </AuthLayoutRoute>
+          }
+        />
+
         {/* Routes with main Layout */}
         <Route
           path="/repositories"
@@ -27,21 +40,8 @@ function App() {
           }
         />
 
-        {/* Routes with AuthLayout */}
-        <Route
-          path="/sign-in"
-          element={
-            <AuthLayoutRoute>
-              <SignIn />
-            </AuthLayoutRoute>
-          }
-        />
-
-        {/* Redirect root to repositories */}
-        <Route path="/" element={<Navigate to="/repositories" replace />} />
-
-        {/* Catch all route */}
-        <Route path="*" element={<Navigate to="/repositories" replace />} />
+        {/* Catch all route - redirect to sign-in */}
+        <Route path="*" element={<Navigate to="/sign-in" replace />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,9 +1,17 @@
 import { SideLinkProps } from "@/constants/side-links";
 import classNames from "classnames";
+import { useNavigate } from "react-router-dom";
 
 export const SidebarLink = (props: SideLinkProps) => {
+  const navigate = useNavigate();
   return (
-    <button onClick={() => props.setIsActive && props.setIsActive(props.name)}>
+    <button
+      onClick={() => {
+        if (props.setIsActive) props.setIsActive(props.name);
+        console.log(props.href);
+        if (props.href !== "/") navigate(props.href);
+      }}
+    >
       <div
         className={classNames(
           "flex items-center gap-[11px] py-[10px] group hover:bg-action rounded-md cursor-pointer px-[14px] transition-all duration-100 ease-in-out",
