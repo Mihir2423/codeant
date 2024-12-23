@@ -1,11 +1,26 @@
 import { Logo } from "@/components/globals";
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SignInCard } from "./_components/sign-in-card";
 import { signInOptions } from "@/constants/sign-in-options";
 
 const SignIn = () => {
   const [activeTab, setActiveTab] = useState("saas");
+  const [tabUnderlineWidth, setTabUnderlineWidth] = useState(0);
+  const [tabUnderlineLeft, setTabUnderlineLeft] = useState(0);
+  const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const optionsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const currentTab = tabsRef.current[activeTab === "saas" ? 0 : 1];
+    setTabUnderlineLeft(currentTab?.offsetLeft ?? 0);
+    setTabUnderlineWidth(currentTab?.clientWidth ?? 0);
+
+    // Adjust options container height
+    if (optionsRef.current) {
+      optionsRef.current.style.height = `${optionsRef.current.scrollHeight}px`;
+    }
+  }, [activeTab]);
   return (
     <div className="grid md:grid-cols-2 h-screen">
       <div className="flex justify-start items-end max-md:hidden col-span-1 bg-[url('/bg/auth.png')] bg-cover bg-no-repeat bg-center border-r w-full h-full">
@@ -24,53 +39,35 @@ const SignIn = () => {
               <h1 className="text-content-strong font-semibold text-2xl text-center md:text-[32px]">
                 Welcome to CodeAnt AI
               </h1>
-              <div
-                className={classNames(
-                  "grid grid-cols-2 bg-surface-base border rounded-md w-full"
-                )}
-              >
-                <button
-                  className={classNames(
-                    "flex-1 py-3 md:py-4 rounded-md text-center",
-                    {
-                      "bg-action": activeTab === "saas",
-                      "bg-surface-base": activeTab !== "saas",
-                    }
-                  )}
-                  onClick={() => setActiveTab("saas")}
-                >
-                  <h1
-                    className={classNames("font-semibold text-lg", {
-                      "text-surface-elevated": activeTab === "saas",
-                      "text-content-strong": activeTab !== "saas",
-                    })}
+              <div className="relative bg-gray-100 p-1 rounded-lg">
+                {["saas", "self-hosted"].map((tab, idx) => (
+                  <button
+                    key={tab}
+                    ref={(el) => (tabsRef.current[idx] = el)}
+                    className={`relative z-10 w-1/2 py-2 text-sm font-medium transition-colors duration-200`}
+                    onClick={() => setActiveTab(tab)}
                   >
-                    SAAS
-                  </h1>
-                </button>
-                <button
-                  className={classNames(
-                    "flex-1 py-3 md:py-4  rounded-md text-center",
-                    {
-                      "bg-action": activeTab === "self-hosted",
-                      "bg-surface-base": activeTab !== "self-hosted",
-                    }
-                  )}
-                  onClick={() => setActiveTab("self-hosted")}
-                >
-                  <h1
-                    className={classNames("font-semibold text-lg", {
-                      "text-surface-elevated ": activeTab === "self-hosted",
-                      "text-content-strong": activeTab !== "self-hosted",
-                    })}
-                  >
-                    Self Hosted
-                  </h1>
-                </button>
+                    <h1
+                      className={classNames("font-semibold text-lg transition-all ease-in-out duration-150", {
+                        "text-surface-elevated": activeTab === tab,
+                        "text-content-strong": activeTab !== tab,
+                      })}
+                    >
+                      {tab === "saas" ? "SAAS" : "Self Hosted"}
+                    </h1>
+                  </button>
+                ))}
+                <div
+                  className="absolute inset-y-1 bg-action shadow-sm rounded-md w-fit transition-all duration-300 ease-in-out"
+                  style={{
+                    left: tabUnderlineLeft,
+                    width: tabUnderlineWidth,
+                  }}
+                />
               </div>
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center gap-4 pt-6 w-full">
+          <div className="flex flex-col justify-start items-center gap-4 max-md:px-4 pt-6 w-full min-h-[310px]">
             {signInOptions.map((option) => {
               return option.type === activeTab ? (
                 <SignInCard
